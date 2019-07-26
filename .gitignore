@@ -4,3 +4,4 @@ creds
 .vagrant
 .terraform
 ansible-node/
+test.json
