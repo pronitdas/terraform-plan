@@ -1,0 +1,28 @@
+- name: nodejs - add repository key
+  apt_key:
+    url: "{{ item }}"
+  with_items:
+    - "http://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+    - "https://dl.yarnpkg.com/debian/pubkey.gpg"
+
+- name: nodejs - add repository
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - "deb http://deb.nodesource.com/node_10.x {{ ansible_lsb.codename }} main"
+    - "deb-src http://deb.nodesource.com/node_10.x {{ ansible_lsb.codename }} main"
+    - "deb https://dl.yarnpkg.com/debian/ stable main"
+
+- name: nodejs - install
+  apt:
+    name: "{{ item }}"
+    state: "present"
+  with_items:
+    - "nodejs"
+    - "yarn"
+
+- name: Start pm2
+  command: pm2 start /var/www/web-api/ --name node-app
+  

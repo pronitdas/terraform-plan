@@ -1,0 +1,2 @@
+[api]
+3.218.92.235 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=/home/pronit/tardis/workspaces/csa/cicd/admin_key.pem

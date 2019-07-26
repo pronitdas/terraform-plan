@@ -1,0 +1,21 @@
+---
+- hosts: all
+  vars:
+    ansistrano_deploy_to: "/srv/www/welgoapi"
+    ansistrano_version_dir: "releases" # Releases folder name
+    ansistrano_git_identity_key_path: "/home/pronit/tardis/imp-stuff/pem_files/bit_deploy"
+    ansistrano_deploy_via: "git" # Method used to deliver the code to the server. Options are copy, rsync, git, svn, s3 or download. Copy, download and s3 have an optional step to unarchive the downloaded file which can be used by adding _unarchive. You can check all the options inside tasks/update-code folder!
+    # Variables used in the Git deployment strategy
+    code_dir: "/srv/www/welgoapi/current"
+    ansistrano_remove_rolled_back: no
+    virtualenv_dir: "/srv/www/welgoapi/current/env"
+    ansistrano_git_repo: "git@bitbucket.org:arkavengers/welgoapi.git" # Location of the git repository
+    ansistrano_git_branch: ark-dev # What version of the repository to check out. This can be the full 40-character SHA-1 hash, the literal string HEAD, a branch name, or a tag name
+    # git_version: "ark-dev"
+    ansistrano_before_update_code_tasks_file: "tasks/before-symlink-task.yml"
+    ansistrano_after_symlink_tasks_file: "tasks/after-update-code-tasks.yml"
+
+  roles: 
+    - ansistrano.rollback
+
+

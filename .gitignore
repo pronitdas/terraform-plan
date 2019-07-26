@@ -1,0 +1,6 @@
+admin_key.pem
+env
+creds
+.vagrant
+.terraform
+ansible-node/
